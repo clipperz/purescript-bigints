@@ -153,8 +153,10 @@ exports.digitsInBase = function(radix) {
   };
 };
 
-exports.modPow = function(exp, mod) {
-	return function(x) {
-		return x.modPow(exp, mod);
+exports.modPow = function(mod) {
+	return function (exp) {
+		return function(x) {
+			return x.modPow(exp, mod);
+		}
 	}
 }
