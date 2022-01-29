@@ -153,9 +153,9 @@ exports.digitsInBase = function(radix) {
   };
 };
 
-exports.modPow = function(mod) {
+exports.modPow = function(x) {
 	return function (exp) {
-		return function(x) {
+		return function(mod) {
 			return x.modPow(exp, mod);
 		}
 	}
