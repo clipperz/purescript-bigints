@@ -6,7 +6,9 @@
     "test": "pulp test"
   },
   "dependencies": {
-    "big-integer": "^1.6.27"
+    "big-integer": "^1.6.27",
+    "purescript": "^0.14.5",
+    "spago": "^0.20.3"
   },
   "devDependencies": {
     "bower": "^1.8.12",

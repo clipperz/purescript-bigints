@@ -26,6 +26,7 @@ module Data.BigInt
   , rem
   , toInt
   , toNumber
+  , modPow
   ) where
 
 import Prelude
@@ -202,3 +203,5 @@ quot = biDiv
 -- | The remainder after truncating integer division
 rem :: BigInt -> BigInt -> BigInt
 rem = biMod
+
+foreign import modPow :: BigInt -> BigInt -> BigInt -> BigInt

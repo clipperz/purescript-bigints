@@ -152,3 +152,9 @@ exports.digitsInBase = function(radix) {
     return x.toArray(radix);
   };
 };
+
+exports.modPow = function(exp, mod) {
+	return function(x) {
+		return x.modPow(exp, mod);
+	}
+}
