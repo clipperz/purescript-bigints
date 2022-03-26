@@ -27,14 +27,26 @@ module Data.BigInt
   , toInt
   , toNumber
   , modPow
+  , mod
   ) where
 
-import Prelude
+-- import Prelude
 
+import Control.Semigroupoid ((>>>), (<<<))
 import Data.Array.NonEmpty (NonEmptyArray)
+import Data.CommutativeRing (class CommutativeRing)
+import Data.Eq (class Eq)
+import Data.EuclideanRing (class EuclideanRing)
+import Data.Function (($))
 import Data.Int (floor)
 import Data.Int as Int
 import Data.Maybe (Maybe(..), fromJust)
+import Data.Ord (class Ord)
+import Data.Ordering (Ordering(..))
+import Data.Ring (class Ring, (-))
+import Data.Semigroup ((<>))
+import Data.Semiring (class Semiring, (+))
+import Data.Show (class Show)
 import Data.String.NonEmpty (NonEmptyString)
 import Data.String.NonEmpty as NES
 import Partial.Unsafe (unsafePartial)
@@ -205,3 +217,5 @@ rem :: BigInt -> BigInt -> BigInt
 rem = biMod
 
 foreign import modPow :: BigInt -> BigInt -> BigInt -> BigInt
+
+foreign import mod :: BigInt -> BigInt -> BigInt

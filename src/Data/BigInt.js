@@ -154,9 +154,20 @@ exports.digitsInBase = function(radix) {
 };
 
 exports.modPow = function(x) {
-	return function (exp) {
-		return function(mod) {
-			return x.modPow(exp, mod);
-		}
-	}
+  return function (exp) {
+    return function(mod) {
+      return x.modPow(exp, mod);
+    }
+  }
 }
+
+exports.mod = function(x) {
+	return function(y) {
+	  let rem = x.mod(y);
+	  let result = rem;
+	  if (rem.lesser(0)) {
+		  result = (rem.add(y)).mod(y);
+	  };
+	  return result;
+	};
+  };
