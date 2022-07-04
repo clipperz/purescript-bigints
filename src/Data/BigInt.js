@@ -1,8 +1,8 @@
 // module Data.BigInt
 
-var bigInt = require("big-integer");
+import bigInt from "big-integer";
 
-exports.fromBaseImpl = function(just) {
+function fromBaseImpl(just) {
   return function(nothing) {
     return function(b) {
       return function(s) {
@@ -15,14 +15,14 @@ exports.fromBaseImpl = function(just) {
       };
     };
   };
-};
+}
 
 function truncate(n) {
   if (n > 0) return Math.floor(n);
   return Math.ceil(n);
 }
 
-exports.fromNumberImpl = function(just) {
+function fromNumberImpl(just) {
   return function(nothing) {
       return function(n) {
         try {
@@ -33,127 +33,127 @@ exports.fromNumberImpl = function(just) {
         }
       };
   };
-};
+}
 
-exports.fromInt = function(n) {
+function fromInt(n) {
   return bigInt(n);
-};
+}
 
-exports.toBase = function(base) {
+function toBase(base) {
   return function (x) {
     return x.toString(base);
   };
-};
+}
 
-exports.toNumber = function(x) {
+function toNumber(x) {
   return x.toJSNumber();
-};
+}
 
-exports.biAdd = function(x) {
+function biAdd(x) {
   return function(y) {
     return x.add(y);
   };
-};
+}
 
-exports.biMul = function(x) {
+function biMul(x) {
   return function(y) {
     return x.multiply(y);
   };
-};
+}
 
-exports.biSub = function(x) {
+function biSub(x) {
   return function(y) {
     return x.minus(y);
   };
-};
+}
 
-exports.biMod = function(x) {
+function biMod(x) {
   return function(y) {
     return x.mod(y);
   };
-};
+}
 
-exports.biDiv = function(x) {
+function biDiv(x) {
   return function(y) {
     return x.divide(y);
   };
-};
+}
 
-exports.biEquals = function(x) {
+function biEquals(x) {
   return function(y) {
     return x.equals(y);
   };
-};
+}
 
-exports.biCompare = function(x) {
+function biCompare(x) {
   return function(y) {
     return x.compare(y);
   };
-};
+}
 
-exports.abs = function(x) {
+function abs(x) {
   return x.abs();
-};
+}
 
-exports.even = function(x) {
+function even(x) {
   return x.isEven();
-};
+}
 
-exports.odd = function(x) {
+function odd(x) {
   return x.isOdd();
-};
+}
 
-exports.prime = function(x) {
+function prime(x) {
   return x.isPrime();
-};
+}
 
-exports.pow = function(x) {
+function pow(x) {
   return function(y) {
     return x.pow(y);
   };
-};
+}
 
-exports.not = function(x) {
+function not(x) {
   return x.not();
-  };
+  }
 
-exports.or = function(x) {
+function or(x) {
   return function(y) {
     return x.or(y);
   };
-};
+}
 
-exports.xor = function(x) {
+function xor(x) {
   return function(y) {
     return x.xor(y);
   };
-};
+}
 
-exports.and = function(x) {
+function and(x) {
   return function(y) {
     return x.and(y);
   };
-};
+}
 
-exports.shl = function(x) {
+function shl(x) {
   return function(n) {
     return x.shiftLeft(n);
   };
-};
+}
 
-exports.shr = function(x) {
+function shr(x) {
   return function(n) {
     return x.shiftRight(n);
   };
-};
+}
 
-exports.digitsInBase = function(radix) {
+function digitsInBase(radix) {
   return function(x) {
     return x.toArray(radix);
   };
-};
+}
 
-exports.modPow = function(x) {
+function modPow(x) {
   return function (exp) {
     return function(mod) {
       return x.modPow(exp, mod);
@@ -161,7 +161,7 @@ exports.modPow = function(x) {
   }
 }
 
-exports.mod = function(x) {
+function mod(x) {
 	return function(y) {
 	  let rem = x.mod(y);
 	  let result = rem;
@@ -170,4 +170,33 @@ exports.mod = function(x) {
 	  };
 	  return result;
 	};
-  };
+  }
+
+export {
+	  fromBaseImpl
+	, fromNumberImpl
+	, fromInt
+	, toBase
+	, toNumber
+	, biAdd
+	, biMul
+	, biSub
+	, biMod
+	, biDiv
+	, biEquals
+	, biCompare
+	, abs
+	, even
+	, odd
+	, prime
+	, pow
+	, not
+	, or
+	, xor
+	, and
+	, shl
+	, shr
+	, digitsInBase
+	, modPow
+	, mod
+}
