@@ -22,10 +22,11 @@ to generate this file without the comments in this block.
   , "numbers"
   , "partial"
   , "prelude"
-  , "psci-support"
   , "quickcheck"
   , "quickcheck-laws"
   , "strings"
+  , "argonaut-codecs"
+  , "either"
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]

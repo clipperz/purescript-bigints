@@ -33,8 +33,12 @@ module Data.BigInt
 -- import Prelude
 
 import Control.Semigroupoid ((>>>), (<<<))
+import Data.Argonaut.Encode.Class (class EncodeJson, encodeJson)
+import Data.Argonaut.Decode.Class (class DecodeJson, decodeJson)
+import Data.Argonaut.Decode.Error (JsonDecodeError(..))
 import Data.Array.NonEmpty (NonEmptyArray)
 import Data.CommutativeRing (class CommutativeRing)
+import Data.Either (Either(..), note, either)
 import Data.Eq (class Eq)
 import Data.EuclideanRing (class EuclideanRing)
 import Data.Function (($))
@@ -47,8 +51,10 @@ import Data.Ring (class Ring, (-))
 import Data.Semigroup ((<>))
 import Data.Semiring (class Semiring, (+))
 import Data.Show (class Show)
+import Data.String.Common (replaceAll)
 import Data.String.NonEmpty (NonEmptyString)
 import Data.String.NonEmpty as NES
+import Data.String.Pattern (Pattern(..), Replacement(..))
 import Partial.Unsafe (unsafePartial)
 
 -- | An arbitrary length integer.
@@ -219,3 +225,11 @@ rem = biMod
 foreign import modPow :: BigInt -> BigInt -> BigInt -> BigInt
 
 foreign import mod :: BigInt -> BigInt -> BigInt
+
+-- | instance for encode and decode Json
+
+instance encodeJsonBigInt :: EncodeJson BigInt where
+  encodeJson bi = encodeJson (toBase 16 bi)
+
+instance decodeJsonBigInt :: DecodeJson BigInt where
+  decodeJson json = either (\e -> Left e) (\v -> note (TypeMismatch "Cannot convert Hex to BigInt") (fromBase 16 $ (replaceAll (Pattern " ") (Replacement "")) $ v)) (decodeJson json)
